@@ -11,6 +11,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import HomeComponent from './components/HomeComponent/HomeComponent';
+import ScrollViewInsidePanel from './components/SlidingPanel/SlidingPanel';
+import BottomSheet from './components/BottomSheet/BottomSheet';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -27,6 +29,7 @@ const App = () => {
           top: 20,
           left: 20,
         }}></View> */}
+      {/* <ScrollViewInsidePanel /> */}
     </View>
   );
 };

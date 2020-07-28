@@ -1,19 +1,75 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import HomeBackground from '../HomeBackgroundImage/HomeBackground';
+import {
+  Text,
+  View,
+  Dimensions,
+  Animated,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
+import SlidingUpPanel from 'rn-sliding-up-panel';
 
-export default function HomeComponent() {
-  return (
-    <View style={styles.homeContainer}>
-      <HomeBackground />
-    </View>
-  );
+const {height} = Dimensions.get('window');
+
+class HomeComponent extends React.Component {
+  _draggableRange = {top: height + 180 - 100, bottom: 380};
+
+  _panel: any;
+
+  _draggedValue = new Animated.Value(0);
+
+  render() {
+    const {top, bottom} = this._draggableRange;
+
+    return (
+      <View style={styles.container}>
+        <Text onPress={() => this._panel.show(360)}>Show panel</Text>
+        <SlidingUpPanel
+          ref={(c) => (this._panel = c)}
+          draggableRange={this._draggableRange}
+          animatedValue={this._draggedValue}
+          snappingPoints={[360]}
+          height={height + 180}
+          friction={1}>
+          <View style={styles.panel}>
+            <Animated.View />
+            <View style={styles.panelHeader}>
+              <Animated.View>
+                <Text style={styles.textHeader}>Sliding Up Panel</Text>
+              </Animated.View>
+            </View>
+            <View style={styles.panel}></View>
+          </View>
+        </SlidingUpPanel>
+      </View>
+    );
+  }
 }
 
+export default HomeComponent;
+
 const styles = StyleSheet.create({
-  homeContainer: {
-    width: '100%',
-    height: '100%',
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  panel: {
+    flex: 1,
+    backgroundColor: '#ff9696',
     position: 'relative',
+    borderRadius: 50,
+  },
+  panelHeader: {
+    height: 180,
+    backgroundColor: '#ff9696',
+    justifyContent: 'flex-end',
+    padding: 24,
+    borderRadius: 50,
+  },
+  textHeader: {
+    fontSize: 28,
+    color: '#FFF',
   },
 });
