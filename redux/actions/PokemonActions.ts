@@ -1,4 +1,4 @@
-import {getAllPokemonURL} from './../../config/PokemonUrl';
+import {getAllPokemonURL, getPokemonImageURL} from './../../config/PokemonUrl';
 import {AllPokemonItem} from './../../Interfaces/PokemonTypes';
 import {
   PokemonLoading,
@@ -59,7 +59,17 @@ export const getAllPokemon = () => async (
     dispatch(fetchAllPokemon());
 
     const res = await axios.get(getAllPokemonURL(100, 0));
-    // console.log(res.data.results);
+
+    //Add pokeId and imageURL for every pokemon
+    res.data.results.forEach((element: any) => {
+      let pokeId = element.url.split('/')[6];
+      let imgUrl = getPokemonImageURL(pokeId);
+
+      element.pokeId = pokeId;
+      element.imgUrl = imgUrl;
+    });
+
+    console.log(res.data.results);
     dispatch(fetchAllPokemonSuccess(res.data.results));
   } catch (e) {
     dispatch(fetchPokemonFailed(e.message));

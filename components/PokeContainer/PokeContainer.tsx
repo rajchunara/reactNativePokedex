@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {AllPokemonItem} from 'Interfaces/PokemonTypes';
+import SvgUri from 'react-native-svg-uri';
 
 interface IPokeContainerProps {
   allPokemon?: AllPokemonItem[] | undefined;
@@ -24,7 +25,21 @@ export default function PokeContainer(props: IPokeContainerProps) {
                 return (
                   <View style={styles.pokeItem} key={index}>
                     <View style={styles.homePokemon}>
-                      <Text>{item.name}</Text>
+                      <View style={styles.imgContainer}>
+                        {/* <Image
+                          style={styles.pokeImage}
+                          source={{uri: item.imgUrl}}
+                        /> */}
+
+                        <SvgUri
+                          width="150"
+                          height="150"
+                          source={{uri: item.imgUrl}}
+                        />
+                      </View>
+                      <View style={styles.nameContainer}>
+                        <Text>{item.name}</Text>
+                      </View>
                     </View>
                   </View>
                 );
@@ -85,5 +100,21 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
 
     elevation: 7,
+  },
+  imgContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pokeImage: {
+    marginTop: 20,
+    width: 150,
+    height: 150,
+  },
+
+  nameContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

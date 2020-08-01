@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {View, Text, ScrollView, Image, StyleSheet} from 'react-native';
+import {View, ScrollView, Image, StyleSheet} from 'react-native';
 import PokeContainer from '../PokeContainer/PokeContainer';
 
-import Store, {RootStore} from '../../redux/store';
+import {RootStore} from '../../redux/store';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAllPokemon} from '../../redux/actions/PokemonActions';
 
