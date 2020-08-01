@@ -12,7 +12,7 @@ import SlidingUpPanel from 'rn-sliding-up-panel';
 const {height} = Dimensions.get('window');
 
 class HomeComponent extends React.Component {
-  _draggableRange = {top: height + 180 - 100, bottom: 380};
+  _draggableRange = {top: height + 180 - 100, bottom: 480};
 
   _panel: any;
 
@@ -38,7 +38,15 @@ class HomeComponent extends React.Component {
                 <Text style={styles.textHeader}>Sliding Up Panel</Text>
               </Animated.View>
             </View>
-            <View style={styles.panel}></View>
+            <View style={styles.panel}>
+              <ScrollView>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
+                  <View style={styles.box} key={index}>
+                    <Text>{item}</Text>
+                  </View>
+                ))}
+              </ScrollView>
+            </View>
           </View>
         </SlidingUpPanel>
       </View>
@@ -71,5 +79,10 @@ const styles = StyleSheet.create({
   textHeader: {
     fontSize: 28,
     color: '#FFF',
+  },
+  box: {
+    height: 100,
+    width: 100,
+    backgroundColor: '#FFF',
   },
 });

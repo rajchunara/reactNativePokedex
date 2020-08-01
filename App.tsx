@@ -9,34 +9,54 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import HomeComponent from './components/HomeComponent/HomeComponent';
-import ScrollViewInsidePanel from './components/SlidingPanel/SlidingPanel';
-import BottomSheet from './components/BottomSheet/BottomSheet';
-
-declare const global: {HermesInternal: null | {}};
+import {StyleSheet, View, Text} from 'react-native';
+import HomeScrollable from './components/HomeScrollable/HomeScrollable';
+import {Provider} from 'react-redux';
+import Store from './redux/store';
 
 const App = () => {
   return (
-    <View style={styles.appContainer}>
-      <HomeComponent />
-      {/* <View
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: 'white',
-          position: 'absolute',
-          top: 20,
-          left: 20,
-        }}></View> */}
-      {/* <ScrollViewInsidePanel /> */}
-    </View>
+    <Provider store={Store}>
+      <View style={styles.appContainer}>
+        <View style={styles.topNavigation}>
+          <Text style={styles.homeTitle}>Home</Text>
+        </View>
+        <HomeScrollable />
+      </View>
+    </Provider>
   );
 };
 
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  topNavigation: {
+    width: '100%',
+    height: 70,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: '#EF5350',
+    zIndex: 1,
+    shadowColor: '#fff',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+
+    elevation: 13,
+  },
+  homeTitle: {
+    marginLeft: 60,
+    fontSize: 22,
+    color: '#f1f1f1',
   },
 });
 
